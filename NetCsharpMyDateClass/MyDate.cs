@@ -54,28 +54,34 @@ namespace NetCsharpMyDateClass
         }
         public int Diff( MyDate m2)
         {
-            if (this.year>m2.year || this.day<=0 || this.month<=0 ||m2.day<=0 || m2.month<=0 || this.day>31 || this.month>12 ||m2.day>31 || m2.month > 12)
+            try
             {
-                Console.WriteLine("Error! Wrong date!");
-                return -1;
-            }
-            else
-            {
-                int daysCount = (this.year * 365 + this.month * 31 + this.day) - (m2.year * 365 + m2.month * 31 + m2.day);
-                    Console.WriteLine($"Diff days {daysCount}");
-                    return daysCount;
-               
-            }
+                if (this.year > m2.year || this.day <= 0 || this.month <= 0 || m2.day <= 0 || m2.month <= 0 || this.day > 31 || this.month > 12 || m2.day > 31 || m2.month > 12)
+                {
+                    throw new Exception("Wrong date");
+                   
+                }
 
+
+                int daysCount = (this.year * 365 + this.month * 31 + this.day) - (m2.year * 365 + m2.month * 31 + m2.day);
+                Console.WriteLine($"Diff days {daysCount}");
+                return daysCount;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message); return -1;
+            }
         }
         public void ChangeDate(int d)
         {
-            if (d < 0)
+            try
             {
-                Console.WriteLine("Error value");
-            }
-            else
-            {
+                if (d < 0)
+                {
+                    throw new Exception("Wrong value");
+                }
+
                 this.day += d;
                 if (this.day > 31)
                 {
@@ -88,6 +94,12 @@ namespace NetCsharpMyDateClass
                     this.year++;
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+           
+            
         }
         public void Print()
         {
